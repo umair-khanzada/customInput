@@ -1,0 +1,87 @@
+<form name="form" class="form-inline" ng-submit="formSubmit(form)">
+<div style="display: flex;">
+    <!--step1 start here-->
+    <div class="form-group col-md-3">
+        <div>
+            <input type="text"
+                   name="step1"
+                   class="form-control"
+                   id="step1"
+                   ng-model="step1"
+                   placeholder="454"
+                   ng-pattern="allowNumberOnly"
+                   ng-minlength="3"
+                   ng-maxlength="3"
+                   ng-keyup="focusOnNext(form, 'step1', 'step2')"
+                   required>
+        </div>
+        <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->
+        <div ng-messages="form.step1.$error" role="alert">
+            <div ng-messages-include="error-messages"></div>
+        </div>
+    </div>
+    <!--step1 end here-->
+
+    <!--step2 start here-->
+    <div class="form-group col-md-3">
+        <div>
+            <input type="text"
+                   name="step2"
+                   class="form-control"
+                   id="step2"
+                   ng-model="step2"
+                   placeholder="1216"
+                   ng-pattern="allowNumberOnly"
+                   ng-minlength="4"
+                   ng-maxlength="4"
+                   ng-keyup="focusOnNext(form, 'step2', 'step3')"
+                   ng-disabled="form.step1.$invalid"
+                   required>
+        </div>
+        <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->
+        <div ng-messages="form.step2.$error" role="alert" ng-if="form.step1.$valid">
+            <div ng-messages-include="error-messages"></div>
+        </div>
+    </div>
+    <!--step2 end here-->
+
+    <!--step3 start here-->
+    <div class="form-group col-md-3">
+        <div>
+            <input type="text"
+                   name="step3"
+                   class="form-control"
+                   id="step3"
+                   ng-model="step3"
+                   placeholder="3456"
+                   ng-pattern="allowNumberOnly"
+                   ng-minlength="4"
+                   ng-maxlength="4"
+                   ng-keyup="focusOnNext(form, 'step3', 'submit')"
+                   ng-disabled="form.step1.$invalid || form.step2.$invalid"
+                   required>
+        </div>
+        <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->
+        <div ng-messages="form.step3.$error" role="alert" ng-if="form.step1.$valid && form.step2.$valid">
+            <div ng-messages-include="error-messages"></div>
+        </div>
+    </div>
+    <!--step3 end here-->
+
+    <div class="col-md-3">
+        <button type="submit" id="submit" class="btn btn-default" ng-disabled="form.$invalid">Submit</button>
+    </div>
+
+</div>
+
+    <div class="alert alert-success col-md-12" ng-show="succMessage">Form submitted successfully.</div>
+
+</form>
+
+
+<script type="text/ng-template" id="error-messages">
+    <div class="alert alert-danger" ng-message="required">This field is required.</div>
+    <div class="alert alert-danger" ng-message="pattern">You can enter only number.</div>
+    <div class="alert alert-danger" ng-message="maxlength">This field can be at most 3 characters long.</div>
+    <div class="alert alert-danger" ng-message="minlength">This field can be at least 3 characters long.</div>
+</script>

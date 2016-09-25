@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>special car number</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.js"></script>
+
+</head>
+<body ng-app="cardNumberApp">
+
+<div class="container" ng-controller="mainCtrl">
+    <div class="row" style="margin-top: 50px">
+        <p>enter card number:</p>
+        <special-card-number ng-model="cardNumber" success-handler="fullCardNumber()"></special-card-number>
+        <div ng-show="cardNumber">card no:{{cardNumber}}</div>
+    </div>
+</div>
+
+
+<script src="app.js"></script>
+</body>
+</html>
