@@ -6,9 +6,10 @@ angular.module("cardNumberApp", ['ngMessages'])
 
     //create main controller.
     .controller("mainCtrl", function($scope) {
-        $scope.fullCardNumber = function(){
+        $scope.fullCardNumber = function(val, separatedVal){
             //do something.
-            console.log("running")
+            console.log("val", val);
+            console.log("separatedVal", separatedVal)
         }
     })
 
@@ -17,8 +18,10 @@ angular.module("cardNumberApp", ['ngMessages'])
         return {
             restrict: "AE",
             scope:{
-              ngModel: "=",
-              successHandler: "&"
+              //ngModel: "=",
+              focus: "=?",   // focus on first input box. type: Boolean
+              specialChar: "@?",     //special character the card value seprated by like: dash, comma, etc
+              successHandler: "&" //pass full card number in first argument, card seprated value in second argument.
             },
             templateUrl : "specialCardNumber.html",
             link: function(scope){
@@ -27,8 +30,8 @@ angular.module("cardNumberApp", ['ngMessages'])
                 //Initialization
                 scope.succMessage = false;
 
-                //focus on first input field.
-                angular.element("#step1").focus();
+                //focus on first input field if `scope.focus` is truthy.
+                scope.focus && angular.element("#step1").focus();
 
                 //create regex for allow numbers only.
                 //we able to use input `type="number"` but safari doesn't support `type="number"` that's why we use this trick.
@@ -40,10 +43,16 @@ angular.module("cardNumberApp", ['ngMessages'])
                     if(form[inputName].$valid) angular.element("#" + nextId).focus();
                 };
 
+                //get full card number.
+                function getFullCardNum(separateBy){
+                    if(separateBy) return "" + scope.step1 + separateBy + scope.step2 + separateBy + scope.step3 + separateBy + scope.step4;
+                    return  "" + scope.step1 + scope.step2 + scope.step3 + scope.step4;
+                }
+
                 scope.formSubmit = function(form){
                     if(form.$valid){
-                        scope.ngModel = scope.step1 + scope.step2 + scope.step3;
-                        scope.successHandler();
+                        var cardNumSepBySpeChar = scope.specialChar ? getFullCardNum(scope.specialChar) : undefined;
+                        scope.successHandler({cardNumber: getFullCardNum(), separatedCardNumber: cardNumSepBySpeChar});
                         scope.succMessage = true;
                         $timeout(function(){
                             scope.succMessage = false;
