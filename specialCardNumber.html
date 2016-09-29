@@ -12,7 +12,7 @@
                    ng-pattern="allowNumberOnly"
                    ng-minlength="3"
                    ng-maxlength="3"
-                   ng-keyup="focusOnNext(form, 'step1', 'step2')"
+                   ng-keyup="transferFocus(form, 'step1', 'step2')"
                    required>
         </div>
         <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->
@@ -37,7 +37,8 @@
                    ng-pattern="allowNumberOnly"
                    ng-minlength="4"
                    ng-maxlength="4"
-                   ng-keyup="focusOnNext(form, 'step2', 'step3')"
+                   ng-keyup="transferFocus(form, 'step2', 'step3')"
+                   ng-focus="transferFocus(form, 'step1', 'step1')"
                    required>
         </div>
         <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->
@@ -62,7 +63,8 @@
                    ng-pattern="allowNumberOnly"
                    ng-minlength="4"
                    ng-maxlength="4"
-                   ng-keyup="focusOnNext(form, 'step3', 'step4')"
+                   ng-keyup="transferFocus(form, 'step3', 'step4')"
+                   ng-focus="transferFocus(form, 'step2', 'step2')"
                    required>
         </div>
         <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->
@@ -87,7 +89,8 @@
                    ng-pattern="allowNumberOnly"
                    ng-minlength="4"
                    ng-maxlength="4"
-                   ng-keyup="focusOnNext(form, 'step4', 'submit')"
+                   ng-keyup="transferFocus(form, 'step4', 'submit')"
+                   ng-focus="transferFocus(form, 'step3', 'step3')"
                    required>
         </div>
         <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->

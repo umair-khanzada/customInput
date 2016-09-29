@@ -19,9 +19,11 @@ angular.module("cardNumberApp", ['ngMessages'])
             restrict: "AE",
             scope:{
               //ngModel: "=",
-              focus: "=?",   // focus on first input box. type: Boolean
+              type: "=",
+              config: "=?",
+              focus: "=?",            //focus on first input box. type: Boolean
               specialChar: "@?",     //special character the card value seprated by like: dash, comma, etc
-              successHandler: "&" //pass full card number in first argument, card seprated value in second argument.
+              successHandler: "&"   //pass full card number in first argument, card seprated value in second argument.
             },
             templateUrl : "specialCardNumber.html",
             link: function(scope){
@@ -30,17 +32,20 @@ angular.module("cardNumberApp", ['ngMessages'])
                 //Initialization
                 scope.succMessage = false;
 
-                //focus on first input field if `scope.focus` is truthy.
-                scope.focus && angular.element("#step1").focus();
-
                 //create regex for allow numbers only.
                 //we able to use input `type="number"` but safari doesn't support `type="number"` that's why we use this trick.
                 scope.allowNumberOnly = "\\d+";
 
-                //focus on next input box if current one is valid.
-                //parameters: (1)form name, (2)current input name with quotes, (3)next input box id with quotes.
-                scope.focusOnNext = function(form, inputName, nextId){
-                    if(form[inputName].$valid) angular.element("#" + nextId).focus();
+                //focus on first input field if `scope.focus` is truthy.
+                scope.focus && angular.element("#step1").focus();
+
+
+
+                //focus on next/previous input box.
+                //In Case of Next: parameters: (1)form name, (2)current input name with quotes, (3)next input box id with quotes.
+                //In Case of Previous: parameters: (1)form name, (2)previous input name with quotes, (3)previous input box id with quotes.
+                scope.transferFocus = function(form, inputName, nextId){
+                    if(form[ inputName ][ inputName === nextId ? "$invalid" : "$valid" ]) angular.element("#" + nextId).focus();
                 };
 
                 //get full card number.
