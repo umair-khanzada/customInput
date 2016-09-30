@@ -32,6 +32,24 @@ angular.module("cardNumberApp", ['ngMessages'])
                 //Initialization
                 scope.succMessage = false;
 
+                //switch (scope.type){
+                //    case "created-card":
+                        scope.config = [
+                            {placeholder: 4545, minLength: 4, maxLength: 4},
+                            {placeholder: 4545, minLength: 4, maxLength: 4},
+                            {placeholder: 4545, minLength: 4, maxLength: 4},
+                            {placeholder: 4545, minLength: 4, maxLength: 4}
+                        ];
+                //        break;
+                //    case "nic-card":
+                //        scope.config = [
+                //            {placeholder: 45301, minLength: 5, maxLength: 5},
+                //            {placeholder: 7886658, minLength: 7, maxLength: 7},
+                //            {placeholder: 5, minLength: 1, maxLength: 1}
+                //        ];
+                //
+                //}
+
                 //create regex for allow numbers only.
                 //we able to use input `type="number"` but safari doesn't support `type="number"` that's why we use this trick.
                 scope.allowNumberOnly = "\\d+";
@@ -45,7 +63,7 @@ angular.module("cardNumberApp", ['ngMessages'])
                 //In Case of Next: parameters: (1)form name, (2)current input name with quotes, (3)next input box id with quotes.
                 //In Case of Previous: parameters: (1)form name, (2)previous input name with quotes, (3)previous input box id with quotes.
                 scope.transferFocus = function(form, inputName, nextId){
-                    if(form[ inputName ][ inputName === nextId ? "$invalid" : "$valid" ]) angular.element("#" + nextId).focus();
+                    if(inputName && form[ inputName ][ inputName === nextId ? "$invalid" : "$valid" ]) angular.element("#" + nextId).focus();
                 };
 
                 //get full card number.
