@@ -1,116 +1,37 @@
 <form name="form" class="form-inline" ng-submit="formSubmit(form)">
-<div style="display: flex;">
-    <!--step1 start here-->
-    <div class="form-group col-md-3" ng-repeat="obj in config" ng-init="nextNum = $index + 1; prevNum = $index - 1; currEleId = 'step' + $index; nextEleId = $last ? 'submit' : 'step' + nextNum; prevEleId = $first ? '' : 'step' + prevNum">
-        <div>
-            {{nextEleId}}, {{prevNum}}
-            <input type="number"
-                   name="{{currEleId}}"
-                   class="form-control"
-                   id="{{currEleId}}"
-                   ng-model="obj.model"
-                   placeholder="454"
-                   ng-pattern="allowNumberOnly"
-                   ng-minlength="3"
-                   ng-maxlength="3"
-                   ng-keyup="transferFocus(form, currEleId, nextEleId)"
-                   ng-focus="transferFocus(form, prevEleId, prevEleId)"
-                   required>
-        </div>
-        <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->
-        <div ng-messages="form[currEleId].$error" role="alert">
-            <div ng-if="form.$submitted" class="alert alert-danger" ng-message="required">This field is required.</div>
-            <div class="alert alert-info" ng-message="pattern">You can enter only number.</div>
-            <div class="alert alert-info" ng-message="maxlength">This field can be at most 3 characters long.</div>
-            <div class="alert alert-info" ng-message="minlength">This field can be at least 3 characters long.</div>
+    <div style="display: flex;">
+        <!--ng-repeat start here-->
+        <div class="form-group col-md-3" ng-repeat="obj in config" ng-init="nextNum = $index + 1; prevNum = $index - 1; currEleId = 'step' + $index; nextEleId = $last ? 'submit' : 'step' + nextNum; prevEleId = $first ? '' : 'step' + prevNum">
+            <div>
+                <input type="text"
+                       autocomplete="off"
+                       name="{{currEleId}}"
+                       class="form-control"
+                       id="{{currEleId}}"
+                       ng-model="obj.model"
+                       placeholder="{{obj.placeholder}}"
+                       ng-pattern="allowNumberOnly"
+                       ng-minlength="{{obj.minLength}}"
+                       ng-maxlength="{{obj.maxLength}}"
+                       ng-keyup="transferFocus(form, currEleId, nextEleId)"
+                       ng-focus="transferFocus(form, prevEleId, prevEleId)"
+                       required>
+            </div>
+            <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->
+            <div ng-messages="form[currEleId].$error" role="alert">
+                <div ng-if="form.$submitted" class="alert alert-danger" ng-message="required">This field is required.</div>
+                <div class="alert alert-info" ng-message="pattern">You can enter only number.</div>
+                <div class="alert alert-info" ng-message="maxlength">This field can be at most {{obj.maxLength}} characters long.</div>
+                <div class="alert alert-info" ng-message="minlength">This field can be at least {{obj.minLength}} characters long.</div>
+            </div>
         </div>
     </div>
-        </div>
-    <!--step1 end here-->
+    <!--ng-repeat end here-->
 
-    <!--step2 start here-->
-    <!--<div class="form-group col-md-3">-->
-        <!--<div>-->
-            <!--<input type="number"-->
-                   <!--name="step2"-->
-                   <!--class="form-control"-->
-                   <!--id="step2"-->
-                   <!--ng-model="step2"-->
-                   <!--placeholder="1216"-->
-                   <!--ng-pattern="allowNumberOnly"-->
-                   <!--ng-minlength="4"-->
-                   <!--ng-maxlength="4"-->
-                   <!--ng-keyup="transferFocus(form, 'step2', 'step3')"-->
-                   <!--ng-focus="transferFocus(form, 'step1', 'step1')"-->
-                   <!--required>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`&ndash;&gt;-->
-        <!--<div ng-messages="form.step2.$error" role="alert">-->
-            <!--<div ng-if="form.$submitted" class="alert alert-danger" ng-message="required">This field is required.</div>-->
-            <!--<div class="alert alert-info" ng-message="pattern">You can enter only number.</div>-->
-            <!--<div class="alert alert-info" ng-message="maxlength">This field can be at most 4 characters long.</div>-->
-            <!--<div class="alert alert-info" ng-message="minlength">This field can be at least 4 characters long.</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash;step2 end here&ndash;&gt;-->
-
-    <!--&lt;!&ndash;step3 start here&ndash;&gt;-->
-    <!--<div class="form-group col-md-3">-->
-        <!--<div>-->
-            <!--<input type="number"-->
-                   <!--name="step3"-->
-                   <!--class="form-control"-->
-                   <!--id="step3"-->
-                   <!--ng-model="step3"-->
-                   <!--placeholder="3456"-->
-                   <!--ng-pattern="allowNumberOnly"-->
-                   <!--ng-minlength="4"-->
-                   <!--ng-maxlength="4"-->
-                   <!--ng-keyup="transferFocus(form, 'step3', 'step4')"-->
-                   <!--ng-focus="transferFocus(form, 'step2', 'step2')"-->
-                   <!--required>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`&ndash;&gt;-->
-        <!--<div ng-messages="form.step3.$error" role="alert">-->
-            <!--<div ng-if="form.$submitted" class="alert alert-danger" ng-message="required">This field is required.</div>-->
-            <!--<div class="alert alert-info" ng-message="pattern">You can enter only number.</div>-->
-            <!--<div class="alert alert-info" ng-message="maxlength">This field can be at most 4 characters long.</div>-->
-            <!--<div class="alert alert-info" ng-message="minlength">This field can be at least 4 characters long.</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash;step3 end here&ndash;&gt;-->
-
-    <!--&lt;!&ndash;step4 start here&ndash;&gt;-->
-    <!--<div class="form-group col-md-3">-->
-        <!--<div>-->
-            <!--<input type="number"-->
-                   <!--name="step4"-->
-                   <!--class="form-control"-->
-                   <!--id="step4"-->
-                   <!--ng-model="step4"-->
-                   <!--placeholder="3456"-->
-                   <!--ng-pattern="allowNumberOnly"-->
-                   <!--ng-minlength="4"-->
-                   <!--ng-maxlength="4"-->
-                   <!--ng-keyup="transferFocus(form, 'step4', 'submit')"-->
-                   <!--ng-focus="transferFocus(form, 'step3', 'step3')"-->
-                   <!--required>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`&ndash;&gt;-->
-        <!--<div ng-messages="form.step4.$error" role="alert">-->
-            <!--<div ng-if="form.$submitted" class="alert alert-danger" ng-message="required">This field is required.</div>-->
-            <!--<div class="alert alert-info" ng-message="pattern">You can enter only number.</div>-->
-            <!--<div class="alert alert-info" ng-message="maxlength">This field can be at most 4 characters long.</div>-->
-            <!--<div class="alert alert-info" ng-message="minlength">This field can be at least 4 characters long.</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--step4 end here-->
 
     <div class="col-md-3">
         <button type="submit" id="submit" class="btn btn-default" ng-disabled="form.$invalid">Submit</button>
     </div>
-
-</div>
 
     <div class="alert alert-success col-md-12" ng-show="succMessage">Form submitted successfully.</div>
 
@@ -118,8 +39,8 @@
 
 
 <!--<script type="text/ng-template" id="error-messages">-->
-    <!--<div class="alert alert-danger" ng-message="required">This field is required.</div>-->
-    <!--<div class="alert alert-danger" ng-message="pattern">You can enter only number.</div>-->
-    <!--<div class="alert alert-danger" ng-message="maxlength">This field can be at most 3 characters long.</div>-->
-    <!--<div class="alert alert-danger" ng-message="minlength">This field can be at least 3 characters long.</div>-->
+<!--<div class="alert alert-danger" ng-message="required">This field is required.</div>-->
+<!--<div class="alert alert-danger" ng-message="pattern">You can enter only number.</div>-->
+<!--<div class="alert alert-danger" ng-message="maxlength">This field can be at most 3 characters long.</div>-->
+<!--<div class="alert alert-danger" ng-message="minlength">This field can be at least 3 characters long.</div>-->
 <!--</script>-->
