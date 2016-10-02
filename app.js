@@ -79,8 +79,7 @@ angular.module("cardNumberApp", ['ngMessages'])
                         fullCardNumber += separateBy ? obj.model + separateBy : obj.model;
                     });
                     //remove last character if separateBy
-                    separateBy && fullCardNumber.slice(0, -1);
-                    return fullCardNumber;
+                    return separateBy ? fullCardNumber.slice(0, -1) : fullCardNumber;
                 }
 
                 scope.formSubmit = function(form){
