@@ -1,46 +1,40 @@
-<form name="form" class="form-inline" ng-submit="formSubmit(form)">
-    <div style="display: flex;">
+
+<form name="form" ng-submit="formSubmit(form)">
         <!--ng-repeat start here-->
-        <div class="form-group col-md-3" ng-repeat="obj in config" ng-init="nextNum = $index + 1; prevNum = $index - 1; currEleId = 'step' + $index; nextEleId = $last ? 'submit' : 'step' + nextNum; prevEleId = $first ? '' : 'step' + prevNum">
-            <div>
+        <div class="after-form" ng-repeat="obj in config" ng-init="nextNum = $index + 1; prevNum = $index - 1; currEleId = 'step' + $index; nextEleId = $last ? 'submit' : 'step' + nextNum; prevEleId = $first ? '' : 'step' + prevNum">
+
+            <div class="input-parent">
                 <input type="text"
                        autocomplete="off"
                        name="{{currEleId}}"
-                       class="form-control"
+                       class="input-box"
                        id="{{currEleId}}"
-                       ng-model="obj.model"
                        placeholder="{{obj.placeholder}}"
+                       ng-model="obj.model"
                        ng-pattern="allowNumberOnly"
                        ng-minlength="{{obj.minLength}}"
                        ng-maxlength="{{obj.maxLength}}"
                        ng-keyup="transferFocus(form, currEleId, nextEleId)"
                        ng-focus="transferFocus(form, prevEleId, prevEleId)"
-                       required>
+                       required />
+                <span ng-bind="specialChar" ng-hide="$last"></span>
             </div>
-            <!--Note: if you want error doesn't show before submit add this `ng-if="form.$submitted"`-->
-            <div ng-messages="form[currEleId].$error" role="alert">
+
+            <div class="error-parent" ng-messages="form[currEleId].$error" role="alert">
                 <div ng-if="form.$submitted" class="alert alert-danger" ng-message="required">This field is required.</div>
                 <div class="alert alert-info" ng-message="pattern">You can enter only number.</div>
                 <div class="alert alert-info" ng-message="maxlength">This field can be at most {{obj.maxLength}} characters long.</div>
                 <div class="alert alert-info" ng-message="minlength">This field can be at least {{obj.minLength}} characters long.</div>
             </div>
+
         </div>
-    </div>
+    <!--</div>-->
     <!--ng-repeat end here-->
 
 
-    <div class="col-md-3">
+    <!--<div class="">-->
         <button type="submit" id="submit" class="btn btn-default" ng-disabled="form.$invalid">Submit</button>
-    </div>
+    <!--</div>-->
 
     <div class="alert alert-success col-md-12" ng-show="succMessage">Form submitted successfully.</div>
-
 </form>
-
-
-<!--<script type="text/ng-template" id="error-messages">-->
-<!--<div class="alert alert-danger" ng-message="required">This field is required.</div>-->
-<!--<div class="alert alert-danger" ng-message="pattern">You can enter only number.</div>-->
-<!--<div class="alert alert-danger" ng-message="maxlength">This field can be at most 3 characters long.</div>-->
-<!--<div class="alert alert-danger" ng-message="minlength">This field can be at least 3 characters long.</div>-->
-<!--</script>-->

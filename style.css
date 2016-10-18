@@ -1,0 +1,24 @@
+.after-form{
+    position: relative;
+    display: inline-block;
+}
+.after-form .input-parent{
+    display: inline-block;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.after-form .input-parent:first-of-type{
+    border-left: 1px solid #ccc;
+}
+.after-form .input-parent:last-of-type{
+    border-right: 1px solid #ccc;
+}
+.input-box{
+    width: 100px;
+    padding: 5px;
+    text-align: center;
+    border: 0;
+}
+.after-form .error-parent{
+    position: absolute;
+}
