@@ -3,7 +3,7 @@
         <!--ng-repeat start here-->
         <div class="after-form" ng-repeat="obj in config" ng-init="nextNum = $index + 1; prevNum = $index - 1; currEleId = 'step' + $index; nextEleId = $last ? 'submit' : 'step' + nextNum; prevEleId = $first ? '' : 'step' + prevNum">
 
-            <div class="input-parent">
+            <div class="input-parent" ng-class="{'last': $last}">
                 <input type="text"
                        autocomplete="off"
                        name="{{currEleId}}"
@@ -18,13 +18,12 @@
                        ng-focus="transferFocus(form, prevEleId, prevEleId)"
                        required />
                 <span ng-bind="specialChar" ng-hide="$last"></span>
-            </div>
-
-            <div class="error-parent" ng-messages="form[currEleId].$error" role="alert">
-                <div ng-if="form.$submitted" class="alert alert-danger" ng-message="required">This field is required.</div>
-                <div class="alert alert-info" ng-message="pattern">You can enter only number.</div>
-                <div class="alert alert-info" ng-message="maxlength">This field can be at most {{obj.maxLength}} characters long.</div>
-                <div class="alert alert-info" ng-message="minlength">This field can be at least {{obj.minLength}} characters long.</div>
+                <div class="error-parent text-center" ng-messages="form[currEleId].$error" role="alert">
+                    <span ng-if="form.$submitted" class="err-mess" ng-message="required">This field is required.</span>
+                    <span class="info-mess" ng-message="pattern">You can enter only number.</span>
+                    <span class="info-mess" ng-message="maxlength">This field can be at most {{obj.maxLength}} characters long.</span>
+                    <span class="info-mess" ng-message="minlength">This field can be at least {{obj.minLength}} characters long.</span>
+                </div>
             </div>
 
         </div>
