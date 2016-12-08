@@ -1,5 +1,5 @@
 
-<form name="form" ng-submit="formSubmit(form)">
+<form name="form" ng-submit="formSubmit(form)" novalidate>
         <!--ng-repeat start here-->
         <div class="after-form" ng-repeat="obj in config" ng-init="nextNum = $index + 1; prevNum = $index - 1; currEleId = 'step' + $index; nextEleId = $last ? 'submit' : 'step' + nextNum; prevEleId = $first ? '' : 'step' + prevNum">
 
