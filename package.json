@@ -1,0 +1,21 @@
+{
+  "name": "specialcardnumber",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umair-khanzada/specialcardnumber.git"
+  },
+  "author": "umair ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/umair-khanzada/specialcardnumber/issues"
+  },
+  "homepage": "https://github.com/umair-khanzada/specialcardnumber#readme",
+  "dependencies": {
+  }
+}

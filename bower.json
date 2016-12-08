@@ -1,0 +1,22 @@
+{
+  "name": "specialcardnumber",
+  "homepage": "https://github.com/umair-khanzada/specialcardnumber",
+  "authors": [
+    "umair ahmed <umairkz52@gmail.com>"
+  ],
+  "description": "this module is created for getting card number with plain and seprated by special character that you provide in special-char option.",
+  "main": "app.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "angular": "^1.5.8",
+    "angular-messages": "^1.5.8"
+  }
+}
