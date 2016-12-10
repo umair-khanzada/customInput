@@ -4,6 +4,7 @@
         <div class="after-form" ng-repeat="obj in config" ng-init="nextNum = $index + 1; prevNum = $index - 1; currEleId = 'step' + $index; nextEleId = $last ? 'submit' : 'step' + nextNum; prevEleId = $first ? '' : 'step' + prevNum">
 
             <div class="input-parent" ng-class="{'last': $last}">
+                <span ng-if="type == 'verification-code' && obj.preFix" ng-bind="obj.preFix"></span>
                 <input type="text"
                        autocomplete="off"
                        name="{{currEleId}}"
